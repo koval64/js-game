@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Snake Canvas</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="game-panel" aria-labelledby="game-title">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Canvas game</p>
+            <h1 id="game-title">Snake</h1>
+          </div>
+
+          <div class="stats" aria-label="Wyniki gry">
+            <div>
+              <span>Score</span>
+              <strong id="score">0</strong>
+            </div>
+            <div>
+              <span>Best</span>
+              <strong id="best-score">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-wrap">
+          <canvas id="game" width="480" height="480" aria-label="Plansza gry Snake"></canvas>
+          <div class="status" id="status" aria-live="polite">Ready</div>
+        </div>
+
+        <div class="controls">
+          <button type="button" id="start-button">Start</button>
+          <button type="button" id="pause-button">Pause</button>
+          <button type="button" id="reset-button">Restart</button>
+        </div>
+
+        <div class="d-pad" aria-label="Sterowanie dotykowe">
+          <button type="button" data-direction="up" aria-label="Gora">^</button>
+          <button type="button" data-direction="left" aria-label="Lewo">&lt;</button>
+          <button type="button" data-direction="down" aria-label="Dol">v</button>
+          <button type="button" data-direction="right" aria-label="Prawo">&gt;</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
