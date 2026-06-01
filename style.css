@@ -116,10 +116,12 @@ h1 {
   width: min(100%, 560px);
   margin: 0 auto;
   overflow: hidden;
+  touch-action: none;
   background: var(--panel);
   border: 1px solid rgba(245, 242, 232, 0.1);
   border-radius: 8px;
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.36);
+  user-select: none;
 }
 
 canvas {
@@ -186,6 +188,8 @@ canvas {
 
 .d-pad button {
   font-size: 1rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .d-pad [data-direction="up"] {
@@ -219,6 +223,12 @@ canvas {
     font-size: 3rem;
   }
 
+  .d-pad {
+    display: grid;
+  }
+}
+
+@media (pointer: coarse) {
   .d-pad {
     display: grid;
   }

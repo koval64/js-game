@@ -6,11 +6,13 @@ const statusElement = document.querySelector("#status");
 const startButton = document.querySelector("#start-button");
 const pauseButton = document.querySelector("#pause-button");
 const resetButton = document.querySelector("#reset-button");
+const boardElement = document.querySelector(".board-wrap");
 
 const gridSize = 24;
 const tileCount = canvas.width / gridSize;
 const tickMs = 115;
 const bestScoreKey = "snakeBestScore";
+const swipeMinDistance = 24;
 const directions = {
   up: { x: 0, y: -1 },
   down: { x: 0, y: 1 },
@@ -26,6 +28,7 @@ let score;
 let bestScore = loadBestScore();
 let timerId = null;
 let state = "ready";
+let swipeStart = null;
 
 function resetGame() {
   snake = [
@@ -76,13 +79,13 @@ function tick() {
   direction = nextDirection;
 
   const head = snake[0];
-  const nextHead = {
+  const nextHead = wrapPosition({
     x: head.x + direction.x,
     y: head.y + direction.y,
-  };
+  });
   const isEating = nextHead.x === food.x && nextHead.y === food.y;
 
-  if (isWallHit(nextHead) || isSnakeHit(nextHead, !isEating)) {
+  if (isSnakeHit(nextHead, !isEating)) {
     endGame();
     return;
   }
@@ -136,6 +139,25 @@ function changeDirection(name) {
   if (!isReverse) {
     nextDirection = candidate;
   }
+}
+
+function handleDirectionInput(name) {
+  changeDirection(name);
+  if (state === "ready") {
+    startGame();
+  }
+}
+
+function getSwipeDirection(deltaX, deltaY) {
+  if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < swipeMinDistance) {
+    return null;
+  }
+
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    return deltaX > 0 ? "right" : "left";
+  }
+
+  return deltaY > 0 ? "down" : "up";
 }
 
 function draw() {
@@ -227,13 +249,11 @@ function saveBestScore(value) {
   }
 }
 
-function isWallHit(position) {
-  return (
-    position.x < 0 ||
-    position.x >= tileCount ||
-    position.y < 0 ||
-    position.y >= tileCount
-  );
+function wrapPosition(position) {
+  return {
+    x: (position.x + tileCount) % tileCount,
+    y: (position.y + tileCount) % tileCount,
+  };
 }
 
 function isSnakeHit(position, ignoreTail = false) {
@@ -259,10 +279,7 @@ document.addEventListener("keydown", (event) => {
 
   if (keyMap[event.key]) {
     event.preventDefault();
-    changeDirection(keyMap[event.key]);
-    if (state === "ready") {
-      startGame();
-    }
+    handleDirectionInput(keyMap[event.key]);
   }
 
   if (event.key === " " || event.key === "Enter") {
@@ -277,11 +294,64 @@ document.addEventListener("keydown", (event) => {
 
 document.querySelectorAll("[data-direction]").forEach((button) => {
   button.addEventListener("click", () => {
-    changeDirection(button.dataset.direction);
-    if (state === "ready") {
-      startGame();
-    }
+    handleDirectionInput(button.dataset.direction);
   });
+});
+
+boardElement.addEventListener("pointerdown", (event) => {
+  if (event.pointerType === "mouse") {
+    return;
+  }
+
+  event.preventDefault();
+  swipeStart = {
+    id: event.pointerId,
+    x: event.clientX,
+    y: event.clientY,
+  };
+  boardElement.setPointerCapture(event.pointerId);
+});
+
+boardElement.addEventListener("pointermove", (event) => {
+  if (!swipeStart || swipeStart.id !== event.pointerId) {
+    return;
+  }
+
+  event.preventDefault();
+  const directionName = getSwipeDirection(
+    event.clientX - swipeStart.x,
+    event.clientY - swipeStart.y
+  );
+
+  if (directionName) {
+    handleDirectionInput(directionName);
+    swipeStart = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+    };
+  }
+});
+
+boardElement.addEventListener("pointerup", (event) => {
+  if (!swipeStart || swipeStart.id !== event.pointerId) {
+    return;
+  }
+
+  event.preventDefault();
+  const directionName = getSwipeDirection(
+    event.clientX - swipeStart.x,
+    event.clientY - swipeStart.y
+  );
+  swipeStart = null;
+
+  if (directionName) {
+    handleDirectionInput(directionName);
+  }
+});
+
+boardElement.addEventListener("pointercancel", () => {
+  swipeStart = null;
 });
 
 startButton.addEventListener("click", startGame);
