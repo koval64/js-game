@@ -1,19 +1,19 @@
 # Snake Canvas
 
-Prosta gra Snake napisana w JavaScript i rysowana na elemencie Canvas. Projekt nie wymaga backendu ani procesu budowania.
+A simple Snake game written in JavaScript and rendered on a Canvas element. The project does not require a backend or a build process.
 
-## Uruchomienie
+## Running
 
-1. Otworz plik `index.html` w przegladarce.
-2. Kliknij `Start` albo nacisnij strzalke, aby rozpoczac gre.
-3. Steruj strzalkami, klawiszami `WASD`, przeciagnieciem palcem po planszy albo przyciskami pod plansza na ekranie dotykowym.
+1. Open `index.html` in a browser.
+2. Click `Start` or press an arrow key to start the game.
+3. Control the snake with arrow keys, `WASD`, swipe gestures on the board, or the touch buttons below the board.
 
-Waz: po wyjsciu za krawedz planszy pojawia sie po przeciwnej stronie.
+Note: when the snake exits one edge of the board, it appears on the opposite side.
 
-Opcjonalnie mozna uruchomic lokalny serwer statyczny:
+Optionally, run a local static server:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Nastepnie otworz `http://localhost:8000`.
+Then open `http://localhost:8000`.
