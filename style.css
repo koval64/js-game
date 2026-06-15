@@ -156,6 +156,7 @@ canvas {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
+  width: 100%;
 }
 
 .controls button,
@@ -164,6 +165,7 @@ canvas {
   background: var(--panel-strong);
   color: var(--text);
   font-weight: 800;
+  min-width: 0;
 }
 
 .controls button:first-child {
@@ -371,6 +373,8 @@ canvas {
   .controls button {
     min-height: 42px;
     font-size: 0.82rem;
+    padding: 0 4px;
+    white-space: nowrap;
   }
 
   .d-pad button {
