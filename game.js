@@ -6,12 +6,15 @@ const statusElement = document.querySelector("#status");
 const startButton = document.querySelector("#start-button");
 const pauseButton = document.querySelector("#pause-button");
 const resetButton = document.querySelector("#reset-button");
+const layoutButton = document.querySelector("#layout-button");
 const boardElement = document.querySelector(".board-wrap");
+const dPadElement = document.querySelector(".d-pad");
 
 const gridSize = 24;
 const tileCount = canvas.width / gridSize;
 const tickMs = 115;
 const bestScoreKey = "snakeBestScore";
+const controlLayoutKey = "snakeControlLayout";
 const swipeMinDistance = 24;
 const directions = {
   up: { x: 0, y: -1 },
@@ -19,6 +22,13 @@ const directions = {
   left: { x: -1, y: 0 },
   right: { x: 1, y: 0 },
 };
+const controlLayouts = [
+  { id: "classic", label: "Layout 1", name: "Classic" },
+  { id: "row-ldur", label: "Layout 2", name: "Left Down Up Right" },
+  { id: "row-udlr", label: "Layout 3", name: "Up Down Left Right" },
+  { id: "split-thumbs", label: "Layout 4", name: "Split thumbs" },
+  { id: "row-ludr", label: "Layout 5", name: "Left Up Down Right" },
+];
 
 let snake;
 let food;
@@ -29,6 +39,7 @@ let bestScore = loadBestScore();
 let timerId = null;
 let state = "ready";
 let swipeStart = null;
+let controlLayoutIndex = loadControlLayoutIndex();
 
 function resetGame() {
   snake = [
@@ -226,6 +237,23 @@ function setStatus(text) {
   statusElement.classList.toggle("hidden", text.length === 0);
 }
 
+function updateControlLayout() {
+  const layout = controlLayouts[controlLayoutIndex];
+  dPadElement.dataset.layout = layout.id;
+  layoutButton.textContent = layout.label;
+  layoutButton.title = `${layout.label}: ${layout.name}`;
+  layoutButton.setAttribute(
+    "aria-label",
+    `Switch touch control layout. Current: ${layout.label}, ${layout.name}`
+  );
+}
+
+function cycleControlLayout() {
+  controlLayoutIndex = (controlLayoutIndex + 1) % controlLayouts.length;
+  saveControlLayoutIndex(controlLayoutIndex);
+  updateControlLayout();
+}
+
 function stopTimer() {
   if (timerId !== null) {
     window.clearInterval(timerId);
@@ -246,6 +274,31 @@ function saveBestScore(value) {
     localStorage.setItem(bestScoreKey, String(value));
   } catch {
     // The game still works when persistent browser storage is unavailable.
+  }
+}
+
+function loadControlLayoutIndex() {
+  try {
+    const savedIndex = Number(localStorage.getItem(controlLayoutKey));
+    if (
+      Number.isInteger(savedIndex) &&
+      savedIndex >= 0 &&
+      savedIndex < controlLayouts.length
+    ) {
+      return savedIndex;
+    }
+  } catch {
+    return 0;
+  }
+
+  return 0;
+}
+
+function saveControlLayoutIndex(value) {
+  try {
+    localStorage.setItem(controlLayoutKey, String(value));
+  } catch {
+    // Layout switching remains available even without persistent storage.
   }
 }
 
@@ -357,5 +410,7 @@ boardElement.addEventListener("pointercancel", () => {
 startButton.addEventListener("click", startGame);
 pauseButton.addEventListener("click", togglePause);
 resetButton.addEventListener("click", resetGame);
+layoutButton.addEventListener("click", cycleControlLayout);
 
+updateControlLayout();
 resetGame();
