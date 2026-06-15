@@ -28,6 +28,7 @@ const controlLayouts = [
   { id: "row-udlr", label: "Layout 3", name: "Up Down Left Right" },
   { id: "split-thumbs", label: "Layout 4", name: "Split thumbs" },
   { id: "row-ludr", label: "Layout 5", name: "Left Up Down Right" },
+  { id: "wide-double", label: "Layout 6", name: "Wide double row" },
 ];
 
 let snake;

@@ -196,6 +196,10 @@ canvas {
   -webkit-tap-highlight-color: transparent;
 }
 
+.d-pad [data-layout-extra] {
+  display: none;
+}
+
 .d-pad[data-layout="classic"] {
   width: min(100%, 190px);
   grid-template-columns: repeat(3, var(--pad-column));
@@ -282,6 +286,56 @@ canvas {
 }
 
 .d-pad[data-layout="split-thumbs"] [data-direction="right"] {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="wide-double"] {
+  width: min(100%, 330px);
+  grid-template-columns: repeat(4, var(--pad-column));
+  grid-template-rows: repeat(2, var(--pad-row));
+}
+
+.d-pad[data-layout="wide-double"] [data-layout-extra] {
+  display: block;
+}
+
+.d-pad[data-layout="wide-double"] [data-control="primary"][data-direction="left"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="wide-double"] [data-control="primary"][data-direction="up"] {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="wide-double"] [data-extra-slot="up-top"] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="wide-double"] [data-control="primary"][data-direction="right"] {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="wide-double"] [data-extra-slot="left-bottom"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="wide-double"] [data-control="primary"][data-direction="down"] {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="wide-double"] [data-extra-slot="down-bottom"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="wide-double"] [data-extra-slot="right-bottom"] {
   grid-column: 4;
   grid-row: 2;
 }
@@ -382,8 +436,8 @@ canvas {
   }
 
   .d-pad {
-    --pad-column: clamp(66px, 18vw, 78px);
-    --pad-row: clamp(64px, 10dvh, 78px);
+    --pad-column: clamp(70px, 18.5vw, 82px);
+    --pad-row: clamp(68px, 10.5dvh, 82px);
     --pad-gap: 6px;
 
     width: min(100%, 246px);
@@ -396,12 +450,13 @@ canvas {
   }
 
   .d-pad[data-layout^="row"],
-  .d-pad[data-layout="split-thumbs"] {
-    width: min(100%, 330px);
+  .d-pad[data-layout="split-thumbs"],
+  .d-pad[data-layout="wide-double"] {
+    width: min(100%, 346px);
   }
 
   .d-pad button {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 }
 
