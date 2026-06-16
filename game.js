@@ -4,9 +4,9 @@ const scoreElement = document.querySelector("#score");
 const bestScoreElement = document.querySelector("#best-score");
 const statusElement = document.querySelector("#status");
 const startButton = document.querySelector("#start-button");
-const pauseButton = document.querySelector("#pause-button");
 const resetButton = document.querySelector("#reset-button");
 const layoutButton = document.querySelector("#layout-button");
+const bestScoreWrap = document.querySelector("#best-score-wrap");
 const boardElement = document.querySelector(".board-wrap");
 const dPadElement = document.querySelector(".d-pad");
 
@@ -56,6 +56,7 @@ function resetGame() {
   state = "ready";
   stopTimer();
   updateHud();
+  updatePlayButton();
   setStatus("Ready");
   draw();
 }
@@ -71,6 +72,8 @@ function startGame() {
 
   state = "running";
   setStatus("");
+  updateHud();
+  updatePlayButton();
   stopTimer();
   timerId = window.setInterval(tick, tickMs);
 }
@@ -79,6 +82,7 @@ function togglePause() {
   if (state === "running") {
     state = "paused";
     stopTimer();
+    updatePlayButton();
     setStatus("Paused");
     return;
   }
@@ -86,6 +90,15 @@ function togglePause() {
   if (state === "paused") {
     startGame();
   }
+}
+
+function handlePlayButton() {
+  if (state === "running" || state === "paused") {
+    togglePause();
+    return;
+  }
+
+  startGame();
 }
 
 function tick() {
@@ -124,6 +137,7 @@ function endGame() {
     saveBestScore(bestScore);
   }
   updateHud();
+  updatePlayButton();
   setStatus("Game over");
   draw();
 }
@@ -232,6 +246,21 @@ function drawSnake() {
 function updateHud() {
   scoreElement.textContent = score;
   bestScoreElement.textContent = bestScore;
+  bestScoreWrap.classList.toggle("hidden", state !== "gameover");
+}
+
+function updatePlayButton() {
+  if (state === "running") {
+    startButton.textContent = "Pause";
+    return;
+  }
+
+  if (state === "paused") {
+    startButton.textContent = "Resume";
+    return;
+  }
+
+  startButton.textContent = "Start";
 }
 
 function setStatus(text) {
@@ -410,8 +439,7 @@ boardElement.addEventListener("pointercancel", () => {
   swipeStart = null;
 });
 
-startButton.addEventListener("click", startGame);
-pauseButton.addEventListener("click", togglePause);
+startButton.addEventListener("click", handlePlayButton);
 resetButton.addEventListener("click", resetGame);
 layoutButton.addEventListener("click", cycleControlLayout);
 

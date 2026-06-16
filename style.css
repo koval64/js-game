@@ -80,27 +80,21 @@ h1 {
   line-height: 0.95;
 }
 
-.stats {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(76px, 1fr));
-  gap: 10px;
-  pointer-events: none;
-}
-
-.stats div {
-  min-width: 76px;
-  padding: 10px 12px;
+.score-row {
+  width: min(100%, 560px);
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto;
+  padding: 5px 10px;
   background: rgba(34, 37, 42, 0.9);
   border: 1px solid rgba(245, 242, 232, 0.08);
   border-radius: 8px;
 }
 
-.stats span {
-  display: block;
+.score-row span {
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 700;
@@ -108,11 +102,14 @@ h1 {
   text-transform: uppercase;
 }
 
-.stats strong {
-  display: block;
-  margin-top: 4px;
-  font-size: 1.45rem;
+.score-row strong {
+  color: var(--text);
+  font-size: 1rem;
   line-height: 1;
+}
+
+.best-final.hidden {
+  display: none;
 }
 
 .board-wrap {
@@ -159,7 +156,7 @@ canvas {
 
 .controls {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   width: 100%;
 }
@@ -442,7 +439,7 @@ canvas {
     max-height: 100%;
     align-content: start;
     gap: 4px;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
   }
 
   .topbar {
@@ -459,30 +456,23 @@ canvas {
     white-space: nowrap;
   }
 
-  .stats {
-    top: 8px;
-    right: 8px;
-    grid-template-columns: repeat(2, minmax(52px, 1fr));
-    gap: 6px;
+  .score-row {
+    min-height: 26px;
+    gap: 10px;
+    padding: 4px 8px;
   }
 
-  .stats div {
-    min-width: 0;
-    padding: 6px 8px;
+  .score-row span {
+    font-size: 0.64rem;
   }
 
-  .stats span {
-    font-size: 0.62rem;
-  }
-
-  .stats strong {
-    margin-top: 2px;
-    font-size: 1rem;
+  .score-row strong {
+    font-size: 0.9rem;
   }
 
   .board-wrap {
     align-self: start;
-    width: min(100%, calc(100dvh - 214px));
+    width: min(100%, calc(100dvh - 246px));
     max-height: 100%;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
   }
@@ -530,7 +520,7 @@ canvas {
   }
 
   html[data-control-layout="grid-4x3"] .board-wrap {
-    width: min(100%, calc(100dvh - 296px));
+    width: min(100%, calc(100dvh - 328px));
   }
 
   .d-pad button {

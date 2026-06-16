@@ -5,7 +5,7 @@ A simple Snake game written in JavaScript and rendered on a Canvas element. The 
 ## Running
 
 1. Open `index.html` in a browser.
-2. Click `Start` or press an arrow key to start the game.
+2. Click `Start` or press an arrow key to start the game. The same button pauses and resumes once the game is running.
 3. Control the snake with arrow keys, `WASD`, swipe gestures on the board, or the touch buttons below the board.
 4. Use `Layout 1` to cycle through numbered touch-control layouts.
 
