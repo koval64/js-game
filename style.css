@@ -296,7 +296,7 @@ canvas {
   grid-template-rows: repeat(2, var(--pad-row));
 }
 
-.d-pad[data-layout="wide-double"] [data-layout-extra] {
+.d-pad[data-layout="wide-double"] [data-layout-extra~="wide-double"] {
   display: block;
 }
 
@@ -338,6 +338,76 @@ canvas {
 .d-pad[data-layout="wide-double"] [data-extra-slot="right-bottom"] {
   grid-column: 4;
   grid-row: 2;
+}
+
+.d-pad[data-layout="grid-4x3"] {
+  width: min(100%, 346px);
+  grid-template-columns: repeat(4, var(--pad-column));
+  grid-template-rows: repeat(3, var(--pad-row));
+}
+
+.d-pad[data-layout="grid-4x3"] [data-layout-extra~="grid-4x3"] {
+  display: block;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-control="primary"][data-direction="up"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="up-top"] {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="up-top-3"] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="up-top-4"] {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-control="primary"][data-direction="left"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-control="primary"][data-direction="right"] {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="left-bottom"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="right-bottom"] {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-control="primary"][data-direction="down"] {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="down-bottom"] {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="down-bottom-3"] {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+.d-pad[data-layout="grid-4x3"] [data-extra-slot="down-bottom-4"] {
+  grid-column: 4;
+  grid-row: 3;
 }
 
 @media (max-width: 640px) {
@@ -451,8 +521,13 @@ canvas {
 
   .d-pad[data-layout^="row"],
   .d-pad[data-layout="split-thumbs"],
-  .d-pad[data-layout="wide-double"] {
+  .d-pad[data-layout="wide-double"],
+  .d-pad[data-layout="grid-4x3"] {
     width: min(100%, 346px);
+  }
+
+  html[data-control-layout="grid-4x3"] .board-wrap {
+    width: min(100%, calc(100dvh - 338px));
   }
 
   .d-pad button {

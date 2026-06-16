@@ -29,6 +29,7 @@ const controlLayouts = [
   { id: "split-thumbs", label: "Layout 4", name: "Split thumbs" },
   { id: "row-ludr", label: "Layout 5", name: "Left Up Down Right" },
   { id: "wide-double", label: "Layout 6", name: "Wide double row" },
+  { id: "grid-4x3", label: "Layout 7", name: "Four by three" },
 ];
 
 let snake;
@@ -240,6 +241,7 @@ function setStatus(text) {
 
 function updateControlLayout() {
   const layout = controlLayouts[controlLayoutIndex];
+  document.documentElement.dataset.controlLayout = layout.id;
   dPadElement.dataset.layout = layout.id;
   layoutButton.textContent = layout.label;
   layoutButton.title = `${layout.label}: ${layout.name}`;
