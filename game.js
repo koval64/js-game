@@ -20,6 +20,7 @@ const directions = {
   left: { x: -1, y: 0 },
   right: { x: 1, y: 0 },
 };
+const directionOrder = ["up", "right", "down", "left"];
 const controlLayouts = [
   { id: "classic", label: "Layout 1", name: "Classic" },
   { id: "row-ldur", label: "Layout 2", name: "Left Down Up Right" },
@@ -28,6 +29,8 @@ const controlLayouts = [
   { id: "row-ludr", label: "Layout 5", name: "Left Up Down Right" },
   { id: "wide-double", label: "Layout 6", name: "Wide double row" },
   { id: "grid-4x3", label: "Layout 7", name: "Four by three" },
+  { id: "turn-sides", label: "Layout 8", name: "Side turns" },
+  { id: "turn-sides-swapped", label: "Layout 9", name: "Side turns swapped" },
 ];
 
 let snake;
@@ -171,6 +174,14 @@ function handleDirectionInput(name) {
   if (state === "ready") {
     startGame();
   }
+}
+
+function handleTurnInput(turn) {
+  const currentDirection = getDirectionName(nextDirection);
+  const currentIndex = directionOrder.indexOf(currentDirection);
+  const offset = turn === "left" ? -1 : 1;
+  const nextIndex = (currentIndex + offset + directionOrder.length) % directionOrder.length;
+  handleDirectionInput(directionOrder[nextIndex]);
 }
 
 function getSwipeDirection(deltaX, deltaY) {
@@ -337,6 +348,13 @@ function wrapPosition(position) {
   };
 }
 
+function getDirectionName(vector) {
+  return directionOrder.find((name) => {
+    const directionVector = directions[name];
+    return directionVector.x === vector.x && directionVector.y === vector.y;
+  });
+}
+
 function isSnakeHit(position, ignoreTail = false) {
   const body = ignoreTail ? snake.slice(0, -1) : snake;
   return body.some((part) => part.x === position.x && part.y === position.y);
@@ -376,6 +394,12 @@ document.addEventListener("keydown", (event) => {
 document.querySelectorAll("[data-direction]").forEach((button) => {
   button.addEventListener("click", () => {
     handleDirectionInput(button.dataset.direction);
+  });
+});
+
+document.querySelectorAll("[data-turn]").forEach((button) => {
+  button.addEventListener("click", () => {
+    handleTurnInput(button.dataset.turn);
   });
 });
 
