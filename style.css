@@ -76,7 +76,7 @@ button:focus-visible {
 
 h1 {
   margin: 0;
-  font-size: clamp(2.2rem, 4rem, 4.2rem);
+  font-size: clamp(1.8rem, 3rem, 3.1rem);
   line-height: 0.95;
 }
 

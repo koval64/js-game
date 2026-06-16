@@ -10,7 +10,7 @@ const dPadElement = document.querySelector(".d-pad");
 
 const gridSize = 24;
 const tileCount = canvas.width / gridSize;
-const tickMs = 140;
+const tickMs = 165;
 const bestScoreKey = "snakeBestScore";
 const controlLayoutKey = "snakeControlLayout";
 const swipeMinDistance = 24;
@@ -36,6 +36,7 @@ const controlLayouts = [
   { id: "turn-two", label: "Layout 12", name: "Two button turns" },
   { id: "turn-two-swapped", label: "Layout 13", name: "Two button turns swapped" },
 ];
+const defaultControlLayoutId = "turn-two";
 
 let snake;
 let food;
@@ -322,7 +323,12 @@ function saveBestScore(value) {
 
 function loadControlLayoutIndex() {
   try {
-    const savedIndex = Number(localStorage.getItem(controlLayoutKey));
+    const savedValue = localStorage.getItem(controlLayoutKey);
+    if (savedValue === null) {
+      return getDefaultControlLayoutIndex();
+    }
+
+    const savedIndex = Number(savedValue);
     if (
       Number.isInteger(savedIndex) &&
       savedIndex >= 0 &&
@@ -331,10 +337,17 @@ function loadControlLayoutIndex() {
       return savedIndex;
     }
   } catch {
-    return 0;
+    return getDefaultControlLayoutIndex();
   }
 
-  return 0;
+  return getDefaultControlLayoutIndex();
+}
+
+function getDefaultControlLayoutIndex() {
+  const index = controlLayouts.findIndex(
+    (layout) => layout.id === defaultControlLayoutId
+  );
+  return index === -1 ? 0 : index;
 }
 
 function saveControlLayoutIndex(value) {
