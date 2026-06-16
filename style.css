@@ -447,13 +447,14 @@ canvas {
   grid-row: 2;
 }
 
-.d-pad[data-layout="turn-hybrid"] {
+.d-pad[data-layout^="turn-hybrid"] {
   width: min(100%, 364px);
   grid-template-columns: repeat(4, var(--pad-column));
   grid-template-rows: repeat(2, var(--pad-row));
 }
 
-.d-pad[data-layout="turn-hybrid"] [data-layout-extra~="turn-hybrid"] {
+.d-pad[data-layout="turn-hybrid"] [data-layout-extra~="turn-hybrid"],
+.d-pad[data-layout="turn-hybrid-inverted"] [data-layout-extra~="turn-hybrid-inverted"] {
   display: block;
 }
 
@@ -493,6 +494,46 @@ canvas {
 }
 
 .d-pad[data-layout="turn-hybrid"] [data-turn-slot="bottom-right"] {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-control="primary"][data-direction="down"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-turn-slot="top-left"] {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-turn-slot="top-right"] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-control="primary"][data-direction="left"] {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-control="primary"][data-direction="right"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-turn-slot="bottom-left"] {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-turn-slot="bottom-right"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.d-pad[data-layout="turn-hybrid-inverted"] [data-control="primary"][data-direction="up"] {
   grid-column: 4;
   grid-row: 2;
 }
@@ -602,12 +643,28 @@ canvas {
   .d-pad[data-layout="wide-double"],
   .d-pad[data-layout="grid-4x3"],
   .d-pad[data-layout^="turn-sides"],
-  .d-pad[data-layout="turn-hybrid"] {
+  .d-pad[data-layout^="turn-hybrid"] {
     width: min(100%, 364px);
+  }
+
+  .d-pad[data-layout^="turn-hybrid"] {
+    --pad-column: clamp(74px, 20vw, 96px);
+    --pad-row: clamp(78px, 12dvh, 96px);
+    --pad-gap: 2px;
+
+    width: min(100%, 390px);
+  }
+
+  .d-pad[data-layout^="turn-hybrid"] button {
+    font-size: 1.7rem;
   }
 
   html[data-control-layout="grid-4x3"] .board-wrap {
     width: min(100%, calc(100dvh - 314px));
+  }
+
+  html[data-control-layout^="turn-hybrid"] .board-wrap {
+    width: min(100%, calc(100dvh - 236px));
   }
 
   .d-pad button {
