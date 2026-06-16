@@ -10,7 +10,7 @@ const dPadElement = document.querySelector(".d-pad");
 
 const gridSize = 24;
 const tileCount = canvas.width / gridSize;
-const tickMs = 115;
+const tickMs = 140;
 const bestScoreKey = "snakeBestScore";
 const controlLayoutKey = "snakeControlLayout";
 const swipeMinDistance = 24;
@@ -31,6 +31,7 @@ const controlLayouts = [
   { id: "grid-4x3", label: "Layout 7", name: "Four by three" },
   { id: "turn-sides", label: "Layout 8", name: "Side turns" },
   { id: "turn-sides-swapped", label: "Layout 9", name: "Side turns swapped" },
+  { id: "turn-hybrid", label: "Layout 10", name: "Hybrid turns" },
 ];
 
 let snake;
