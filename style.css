@@ -538,6 +538,30 @@ canvas {
   grid-row: 2;
 }
 
+.d-pad[data-layout^="turn-two"] {
+  width: min(100%, 364px);
+  grid-template-columns: repeat(2, var(--pad-column));
+  grid-template-rows: var(--pad-row);
+}
+
+.d-pad[data-layout^="turn-two"] [data-control="primary"] {
+  display: none;
+}
+
+.d-pad[data-layout="turn-two"] [data-turn-slot="top-left"],
+.d-pad[data-layout="turn-two-swapped"] [data-turn-slot="bottom-left"] {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.d-pad[data-layout="turn-two"] [data-turn-slot="top-right"],
+.d-pad[data-layout="turn-two-swapped"] [data-turn-slot="bottom-right"] {
+  display: block;
+  grid-column: 2;
+  grid-row: 1;
+}
+
 @media (max-width: 640px) {
   html,
   body {
@@ -643,27 +667,40 @@ canvas {
   .d-pad[data-layout="wide-double"],
   .d-pad[data-layout="grid-4x3"],
   .d-pad[data-layout^="turn-sides"],
-  .d-pad[data-layout^="turn-hybrid"] {
+  .d-pad[data-layout^="turn-hybrid"],
+  .d-pad[data-layout^="turn-two"] {
     width: min(100%, 364px);
   }
 
-  .d-pad[data-layout^="turn-hybrid"] {
-    --pad-column: clamp(76px, 21vw, 104px);
-    --pad-row: clamp(96px, 15dvh, 120px);
-    --pad-gap: 0px;
-
-    width: min(100%, 416px);
+  .d-pad[data-layout^="turn-hybrid"],
+  .d-pad[data-layout^="turn-two"] {
+    width: 100%;
+    gap: 6px;
   }
 
-  .d-pad[data-layout^="turn-hybrid"] button {
-    font-size: 2.1rem;
+  .d-pad[data-layout^="turn-hybrid"] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+  }
+
+  .d-pad[data-layout^="turn-two"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .d-pad[data-layout^="turn-hybrid"] button,
+  .d-pad[data-layout^="turn-two"] button {
+    aspect-ratio: 1;
+    font-size: clamp(2rem, 10vw, 3.2rem);
+    min-height: 0;
   }
 
   html[data-control-layout="grid-4x3"] .board-wrap {
     width: min(100%, calc(100dvh - 314px));
   }
 
-  html[data-control-layout^="turn-hybrid"] .board-wrap {
+  html[data-control-layout^="turn-hybrid"] .board-wrap,
+  html[data-control-layout^="turn-two"] .board-wrap {
     width: min(100%, calc(100dvh - 284px));
   }
 

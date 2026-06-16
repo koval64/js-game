@@ -33,6 +33,8 @@ const controlLayouts = [
   { id: "turn-sides-swapped", label: "Layout 9", name: "Side turns swapped" },
   { id: "turn-hybrid", label: "Layout 10", name: "Hybrid turns" },
   { id: "turn-hybrid-inverted", label: "Layout 11", name: "Hybrid turns inverted" },
+  { id: "turn-two", label: "Layout 12", name: "Two button turns" },
+  { id: "turn-two-swapped", label: "Layout 13", name: "Two button turns swapped" },
 ];
 
 let snake;
