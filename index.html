@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Snake Canvas</title>
-    <link rel="stylesheet" href="style.css?v=20260616-layouts5">
+    <link rel="stylesheet" href="style.css?v=20260616-layouts6">
   </head>
   <body>
     <main class="game-shell">
@@ -22,12 +22,11 @@
           <div class="status" id="status" aria-live="polite">Ready</div>
         </div>
 
-        <div class="score-row" aria-label="Game score">
-          <span>Score <strong id="score">0</strong></span>
-          <span class="best-final hidden" id="best-score-wrap">Best <strong id="best-score">0</strong></span>
-        </div>
-
         <div class="controls">
+          <div class="score-chip" aria-label="Game score">
+            <span>Score</span>
+            <strong id="score">0</strong>
+          </div>
           <button type="button" id="start-button">Start</button>
           <button type="button" id="reset-button">Restart</button>
           <button type="button" id="layout-button">Layout 1</button>
@@ -50,6 +49,6 @@
       </section>
     </main>
 
-    <script src="game.js?v=20260616-layouts5"></script>
+    <script src="game.js?v=20260616-layouts6"></script>
   </body>
 </html>

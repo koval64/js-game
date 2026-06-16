@@ -1,12 +1,10 @@
 const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
 const scoreElement = document.querySelector("#score");
-const bestScoreElement = document.querySelector("#best-score");
 const statusElement = document.querySelector("#status");
 const startButton = document.querySelector("#start-button");
 const resetButton = document.querySelector("#reset-button");
 const layoutButton = document.querySelector("#layout-button");
-const bestScoreWrap = document.querySelector("#best-score-wrap");
 const boardElement = document.querySelector(".board-wrap");
 const dPadElement = document.querySelector(".d-pad");
 
@@ -138,7 +136,7 @@ function endGame() {
   }
   updateHud();
   updatePlayButton();
-  setStatus("Game over");
+  setStatus(`Game over - Best ${bestScore}`);
   draw();
 }
 
@@ -245,8 +243,6 @@ function drawSnake() {
 
 function updateHud() {
   scoreElement.textContent = score;
-  bestScoreElement.textContent = bestScore;
-  bestScoreWrap.classList.toggle("hidden", state !== "gameover");
 }
 
 function updatePlayButton() {
