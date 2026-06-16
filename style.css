@@ -648,15 +648,15 @@ canvas {
   }
 
   .d-pad[data-layout^="turn-hybrid"] {
-    --pad-column: clamp(74px, 20vw, 96px);
-    --pad-row: clamp(78px, 12dvh, 96px);
-    --pad-gap: 2px;
+    --pad-column: clamp(76px, 21vw, 104px);
+    --pad-row: clamp(96px, 15dvh, 120px);
+    --pad-gap: 0px;
 
-    width: min(100%, 390px);
+    width: min(100%, 416px);
   }
 
   .d-pad[data-layout^="turn-hybrid"] button {
-    font-size: 1.7rem;
+    font-size: 2.1rem;
   }
 
   html[data-control-layout="grid-4x3"] .board-wrap {
@@ -664,7 +664,7 @@ canvas {
   }
 
   html[data-control-layout^="turn-hybrid"] .board-wrap {
-    width: min(100%, calc(100dvh - 236px));
+    width: min(100%, calc(100dvh - 284px));
   }
 
   .d-pad button {
