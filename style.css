@@ -61,7 +61,7 @@ button:focus-visible {
 .topbar {
   display: flex;
   align-items: end;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
 }
 
@@ -81,9 +81,14 @@ h1 {
 }
 
 .stats {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(2, minmax(76px, 1fr));
   gap: 10px;
+  pointer-events: none;
 }
 
 .stats div {
@@ -437,14 +442,11 @@ canvas {
     max-height: 100%;
     align-content: start;
     gap: 4px;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto;
   }
 
   .topbar {
-    align-items: center;
-    flex-direction: row;
-    gap: 10px;
-    min-height: 38px;
+    display: none;
   }
 
   .eyebrow {
@@ -458,8 +460,9 @@ canvas {
   }
 
   .stats {
-    flex: 1;
-    grid-template-columns: repeat(2, minmax(58px, 1fr));
+    top: 8px;
+    right: 8px;
+    grid-template-columns: repeat(2, minmax(52px, 1fr));
     gap: 6px;
   }
 
@@ -479,7 +482,7 @@ canvas {
 
   .board-wrap {
     align-self: start;
-    width: min(100%, calc(100dvh - 252px));
+    width: min(100%, calc(100dvh - 214px));
     max-height: 100%;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
   }
@@ -527,7 +530,7 @@ canvas {
   }
 
   html[data-control-layout="grid-4x3"] .board-wrap {
-    width: min(100%, calc(100dvh - 338px));
+    width: min(100%, calc(100dvh - 296px));
   }
 
   .d-pad button {
