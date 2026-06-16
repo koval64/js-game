@@ -458,7 +458,8 @@ canvas {
 }
 
 .d-pad[data-layout="turn-hybrid"] [data-control="primary"][data-direction="left"] {
-  display: none;
+  grid-column: 3;
+  grid-row: 1;
 }
 
 .d-pad[data-layout="turn-hybrid"] [data-turn-slot="top-left"] {
@@ -473,7 +474,7 @@ canvas {
 
 .d-pad[data-layout="turn-hybrid"] [data-control="primary"][data-direction="up"] {
   grid-column: 3;
-  grid-row: 1;
+  grid-row: 2;
 }
 
 .d-pad[data-layout="turn-hybrid"] [data-turn-slot="top-right"] {
@@ -488,11 +489,6 @@ canvas {
 
 .d-pad[data-layout="turn-hybrid"] [data-control="primary"][data-direction="right"] {
   grid-column: 2;
-  grid-row: 2;
-}
-
-.d-pad[data-layout="turn-hybrid"] [data-extra-slot="up-top"] {
-  grid-column: 3;
   grid-row: 2;
 }
 
