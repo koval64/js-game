@@ -22,17 +22,6 @@ const directions = {
 };
 const directionOrder = ["up", "right", "down", "left"];
 const controlLayouts = [
-  { id: "classic", label: "Layout 1", name: "Classic" },
-  { id: "row-ldur", label: "Layout 2", name: "Left Down Up Right" },
-  { id: "row-udlr", label: "Layout 3", name: "Up Down Left Right" },
-  { id: "split-thumbs", label: "Layout 4", name: "Split thumbs" },
-  { id: "row-ludr", label: "Layout 5", name: "Left Up Down Right" },
-  { id: "wide-double", label: "Layout 6", name: "Wide double row" },
-  { id: "grid-4x3", label: "Layout 7", name: "Four by three" },
-  { id: "turn-sides", label: "Layout 8", name: "Side turns" },
-  { id: "turn-sides-swapped", label: "Layout 9", name: "Side turns swapped" },
-  { id: "turn-hybrid", label: "Layout 10", name: "Hybrid turns" },
-  { id: "turn-hybrid-inverted", label: "Layout 11", name: "Hybrid turns inverted" },
   { id: "turn-two", label: "Layout 12", name: "Two button turns" },
   { id: "turn-two-swapped", label: "Layout 13", name: "Two button turns swapped" },
 ];
@@ -406,12 +395,6 @@ document.addEventListener("keydown", (event) => {
       startGame();
     }
   }
-});
-
-document.querySelectorAll("[data-direction]").forEach((button) => {
-  button.addEventListener("click", () => {
-    handleDirectionInput(button.dataset.direction);
-  });
 });
 
 document.querySelectorAll("[data-turn]").forEach((button) => {
